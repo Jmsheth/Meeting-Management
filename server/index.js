@@ -10,7 +10,7 @@ const app =express(); //make app with express
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/empdb'); //create db
+mongoose.connect('mongodb://admin:admin@ds261828.mlab.com:61828/meetingdb'); //create db
 mongoose.Promise=global.Promise;
 app.use('/api',routes);
 
