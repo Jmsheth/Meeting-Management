@@ -10,6 +10,16 @@ router.get('/meetings',function(req,res,next){
   });
 });
 
+//get by id
+router.get('/meetings/:id',function(req,res,next){
+
+    Meeting.findOne({_id:req.params.id},req.body).then(function(meeting){
+      res.send(meeting);
+
+    });
+
+});
+
 //insert
 router.post('/meetings',function(req,res,next){
   Meeting.create(req.body).then(function(meeting){
@@ -34,5 +44,30 @@ router.delete('/meetings/:id',function(req,res,next){
       res.send(meeting);
   });
 });
+
+//push new topics
+router.post('/meetings/topics/:id',function(req,res,next){
+  Meeting.findOne({_id:req.params.id}, function(error, meeting){
+    if(error){
+        res.json(error);
+    }
+    else if(meeting == null){
+        res.json('no such meeting!')
+    }
+    else{
+      console.log(req.params.topics);
+        Meeting.topics.push({ t_name: "trupal" });
+        Meeting.save( function(error, data){
+            if(error){
+                res.json(error);
+            }
+            else{
+                res.json(data);
+            }
+        });
+    }
+});
+});
+
 
 module.exports=router;
