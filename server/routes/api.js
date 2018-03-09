@@ -47,10 +47,64 @@ router.delete("/meetings/:id", function(req, res, next) {
 //.................................topics---------------------------------------------------
 //push new topics
 
+router.post('/meetings/topics/:meetingid',function(req,res,next){
+  Meeting.findByIdAndUpdate(
+     { _id: req.params.meetingid },
+     { $push: {"topics": req.body}},
+     {  safe: true, upsert: true},
+       function(err, model) {
+         if(err){
+        	console.log(err);
+        	return res.send(err);
+         }
+          return res.json(model);
+      });
+});
 
 
 //delete topics
+router.delete('/meetings/topics/:meetingid/:topicid',function(req,res,next){
+  Meeting.findByIdAndUpdate(
+     { _id: req.params.meetingid },
+    { $pull: { 'topics': {  _id: req.params.topicid } } },function(err,model){
+       if(err){
+        	console.log(err);
+        	return res.send(err);
+         }
+         return res.json(model);
+     });
+});
 
+//update topics
+router.put('/meetings/topics/:meetingid/:topicid',function(req,res,next){
+  Meeting.update({'topics._id': req.params.topicid},
+       {'$set': {
+              'topics.$.t_name': req.body.t_name,
+ 	   }},
+           function(err,model) {
+ 	   	if(err){
+         	console.log(err);
+         	return res.send(err);
+         }
+         return res.json(model);
+  });
+});
+
+//_______________________________________notes__________________________________
+//put notes
+router.put('/meetings/notes/:id',function(req,res,next){
+  Meeting.findByIdAndUpdate(
+     { _id: req.params.id },
+     { $push: {"notes": req.body}},
+     {  safe: true, upsert: true},
+       function(err, model) {
+         if(err){
+        	console.log(err);
+        	return res.send(err);
+         }
+          return res.json(model);
+      });
+});
 
 //_______________________________________Task__________________________________
 
