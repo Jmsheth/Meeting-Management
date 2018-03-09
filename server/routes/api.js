@@ -46,7 +46,33 @@ router.delete('/meetings/:id',function(req,res,next){
 });
 
 //push new topics
-router.post('/meetings/topics/:id',function(req,res,next){
+router.put('/meetings/topics/:id',function(req,res,next){
+ Meeting.findOne({_id:req.params.id}, function(error, meeting){
+    if(error){
+        res.json(error);
+    }
+    else if(meeting == null){
+        res.json('no such meeting!')
+    }
+    else{
+      console.log(req.body);
+        meeting.topics.push( req.body);
+        meeting.save( function(error, data){
+            if(error){
+                res.json(error);
+            }
+            else{
+                res.json(data);
+            }
+        });
+    }
+});
+
+
+});
+
+//delete new topics
+router.delete('/meetings/topics/:id',function(req,res,next){
   Meeting.findOne({_id:req.params.id}, function(error, meeting){
     if(error){
         res.json(error);
@@ -55,9 +81,9 @@ router.post('/meetings/topics/:id',function(req,res,next){
         res.json('no such meeting!')
     }
     else{
-      console.log(req.params.topics);
-        Meeting.topics.push({ t_name: "trupal" });
-        Meeting.save( function(error, data){
+      console.log(req.body);
+        meeting.topics.pullAll( req.body);
+        meeting.save( function(error, data){
             if(error){
                 res.json(error);
             }
@@ -68,6 +94,5 @@ router.post('/meetings/topics/:id',function(req,res,next){
     }
 });
 });
-
 
 module.exports=router;
