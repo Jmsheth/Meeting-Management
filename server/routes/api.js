@@ -3,6 +3,8 @@ const router = express.Router();
 const Meeting = require("../models/meeting");
 const Task = require("../models/Task");
 
+//....................................meetings............................................................
+
 //get
 router.get("/meetings", function(req, res, next) {
   Meeting.find({}).then(function(meeting) {
@@ -42,7 +44,9 @@ router.delete("/meetings/:id", function(req, res, next) {
   });
 });
 
+//.................................topics---------------------------------------------------
 //push new topics
+
 router.put('/meetings/topics/:id',function(req,res,next){
  Meeting.findOne({_id:req.params.id}, function(error, meeting){
     if(error){
@@ -63,6 +67,26 @@ router.put('/meetings/topics/:id',function(req,res,next){
             }
         });
 
+
+
+//delete topics
+router.delete('/meetings/topics/:id',function(req,res,next){  console.log(req.body);
+  Meeting.findOneAndUpdate(
+
+         { _id: req.params.id },
+         { $pull: { topics: req.body}},
+         // !!!! note the { 'new': true } option
+         { 'new': true },
+         function(error, data) {
+           if(error){
+               res.json(error);
+           }
+           else{
+               res.json(data);
+           }
+         });
+
+
 //_______________________________________Task__________________________________
 
 router.get("/tasks", function(req, res, next) {
@@ -81,6 +105,7 @@ router.post("/tasks", function(req, res, next) {
     })
     .catch(next);
 });
+
 
 
 //update
