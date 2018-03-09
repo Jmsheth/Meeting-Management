@@ -92,18 +92,95 @@ router.put('/meetings/topics/:meetingid/:topicid',function(req,res,next){
 
 //_______________________________________notes__________________________________
 //put notes
-router.put('/meetings/notes/:id',function(req,res,next){
-  Meeting.findByIdAndUpdate(
-     { _id: req.params.id },
-     { $push: {"notes": req.body}},
-     {  safe: true, upsert: true},
-       function(err, model) {
-         if(err){
-        	console.log(err);
-        	return res.send(err);
+router.post('/meetings/notes/:meetingid/:topicid/',function(req,res,next){
+  Meeting.update({'topics._id': req.params.topicid},
+       {$push: {
+              'topics.$.notes': [req.body],
+
+     }},
+           function(err,model) {
+      if(err){
+          console.log(err);
+          return res.send(err);
          }
-          return res.json(model);
-      });
+         return res.json(model);
+  });
+});
+
+//delete notes
+router.delete('/meetings/notes/:meetingid/:topicid/:noteid',function(req,res,next){console.log( req.params.noteid);
+  Meeting.update({'topics._id': req.params.topicid},
+       {'$pull': {
+              'topics.$.notes': {  _id: req.params.noteid },
+ 	   }},
+           function(err,model) {
+ 	   	if(err){
+         	console.log(err);
+         	return res.send(err);
+         }
+         return res.json(model);
+  });
+});
+
+//update notes
+router.put('/meetings/notes/:meetingid/:topicid/:noteid',function(req,res,next){console.log( req.params.noteid);
+  Meeting.update({'topics._id': req.params.topicid},
+       {'$set': {
+              'topics.$.notes':  req.body,
+ 	   }},
+           function(err,model) {
+ 	   	if(err){
+         	console.log(err);
+         	return res.send(err);
+         }
+         return res.json(model);
+  });
+});
+
+//_______________________________________decisons__________________________________
+//put notes
+router.post('/meetings/decisons/:meetingid/:topicid/',function(req,res,next){
+  Meeting.update({'topics._id': req.params.topicid},
+       {$push: {
+              'topics.$.decisons':[req.body],
+     }},
+           function(err,model) {
+      if(err){
+          console.log(err);
+          return res.send(err);
+         }
+         return res.json(model);
+  });
+});
+
+//delete notes
+router.delete('/meetings/decisons/:meetingid/:topicid/:decisonid',function(req,res,next){console.log( req.params.noteid);
+  Meeting.update({'topics._id': req.params.topicid},
+       {'$pull': {
+              'topics.$.decisons': {  _id: req.params.decisonid },
+ 	   }},
+           function(err,model) {
+ 	   	if(err){
+         	console.log(err);
+         	return res.send(err);
+         }
+         return res.json(model);
+  });
+});
+
+//update notes
+router.put('/meetings/decisons/:meetingid/:topicid/:decisonid',function(req,res,next){console.log( req.params.noteid);
+  Meeting.update({'topics._id': req.params.topicid},
+       {'$set': {
+              'topics.$.decisons':  req.body,
+ 	   }},
+           function(err,model) {
+ 	   	if(err){
+         	console.log(err);
+         	return res.send(err);
+         }
+         return res.json(model);
+  });
 });
 
 //_______________________________________Task__________________________________
