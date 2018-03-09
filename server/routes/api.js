@@ -74,6 +74,13 @@ router.get("/tasks", function(req, res, next) {
   });
 });
 
+//get by id
+router.get("/tasks/:id", function(req, res, next) {
+  Task.findOne({ _id: req.params.id }, req.body).then(function(task) {
+    res.send(task);
+  });
+});
+
 router.post("/tasks", function(req, res, next) {
   Task.create(req.body)
     .then(function(task) {

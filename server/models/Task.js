@@ -12,6 +12,9 @@ const taskSchema = new Schema({
     type: String,
     required: [true, "One Participant is required"]
   },
+  dateCreated: {
+    type: Date
+  },
   dueDate: {
     type: Date,
     requied: [false]
