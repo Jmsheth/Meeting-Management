@@ -26,7 +26,12 @@ const taskSchema = new Schema({
   notes: {
     type: String,
     required: [false]
-  }
+  },
+  comments: [
+    {
+      comment: String
+    }
+  ]
 });
 
 const task = mongoose.model("task", taskSchema);

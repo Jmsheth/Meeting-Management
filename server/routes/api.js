@@ -47,184 +47,193 @@ router.delete("/meetings/:id", function(req, res, next) {
 //.................................topics---------------------------------------------------
 //push new topics
 
-router.post('/meetings/topics/:meetingid',function(req,res,next){
+router.post("/meetings/topics/:meetingid", function(req, res, next) {
   Meeting.findByIdAndUpdate(
-     { _id: req.params.meetingid },
-     { $push: {"topics": req.body}},
-     {  safe: true, upsert: true},
-       function(err, model) {
-         if(err){
-        	console.log(err);
-        	return res.send(err);
-         }
-          return res.json(model);
-      });
+    { _id: req.params.meetingid },
+    { $push: { topics: req.body } },
+    { safe: true, upsert: true },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
-
 //delete topics
-router.delete('/meetings/topics/:meetingid/:topicid',function(req,res,next){
+router.delete("/meetings/topics/:meetingid/:topicid", function(req, res, next) {
   Meeting.findByIdAndUpdate(
-     { _id: req.params.meetingid },
-    { $pull: { 'topics': {  _id: req.params.topicid } } },function(err,model){
-       if(err){
-        	console.log(err);
-        	return res.send(err);
-         }
-         return res.json(model);
-     });
+    { _id: req.params.meetingid },
+    { $pull: { topics: { _id: req.params.topicid } } },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //update topics
-router.put('/meetings/topics/:meetingid/:topicid',function(req,res,next){
-  Meeting.update({'topics._id': req.params.topicid},
-       {'$set': {
-              'topics.$.t_name': req.body.t_name,
- 	   }},
-           function(err,model) {
- 	   	if(err){
-         	console.log(err);
-         	return res.send(err);
-         }
-         return res.json(model);
-  });
+router.put("/meetings/topics/:meetingid/:topicid", function(req, res, next) {
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $set: {
+        "topics.$.t_name": req.body.t_name
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //_______________________________________notes__________________________________
 //put notes
-router.post('/meetings/notes/:meetingid/:topicid/',function(req,res,next){
-  Meeting.update({'topics._id': req.params.topicid},
-       {$push: {
-              'topics.$.notes': [req.body],
-
-     }},
-           function(err,model) {
-      if(err){
-          console.log(err);
-          return res.send(err);
-         }
-         return res.json(model);
-  });
+router.post("/meetings/notes/:meetingid/:topicid/", function(req, res, next) {
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $push: {
+        "topics.$.notes": [req.body]
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //delete notes
-router.delete('/meetings/notes/:meetingid/:topicid/:noteid',function(req,res,next){console.log( req.params.noteid);
-  Meeting.update({'topics._id': req.params.topicid},
-       {'$pull': {
-              'topics.$.notes': {  _id: req.params.noteid },
- 	   }},
-           function(err,model) {
- 	   	if(err){
-         	console.log(err);
-         	return res.send(err);
-         }
-         return res.json(model);
-  });
+router.delete("/meetings/notes/:meetingid/:topicid/:noteid", function(
+  req,
+  res,
+  next
+) {
+  console.log(req.params.noteid);
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $pull: {
+        "topics.$.notes": { _id: req.params.noteid }
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //update notes
-router.put('/meetings/notes/:meetingid/:topicid/:noteid',function(req,res,next){console.log( req.params.noteid);
-  Meeting.update({'topics._id': req.params.topicid},
-       {'$set': {
-              'topics.$.notes':  req.body,
- 	   }},
-           function(err,model) {
- 	   	if(err){
-         	console.log(err);
-         	return res.send(err);
-         }
-         return res.json(model);
-  });
+router.put("/meetings/notes/:meetingid/:topicid/:noteid", function(
+  req,
+  res,
+  next
+) {
+  console.log(req.params.noteid);
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $set: {
+        "topics.$.notes": req.body
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //_______________________________________decisons__________________________________
 //put notes
-router.post('/meetings/decisons/:meetingid/:topicid/',function(req,res,next){
-  Meeting.update({'topics._id': req.params.topicid},
-       {$push: {
-              'topics.$.decisons':[req.body],
-     }},
-           function(err,model) {
-      if(err){
-          console.log(err);
-          return res.send(err);
-         }
-         return res.json(model);
-  });
+router.post("/meetings/decisons/:meetingid/:topicid/", function(
+  req,
+  res,
+  next
+) {
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $push: {
+        "topics.$.decisons": [req.body]
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //delete notes
-router.delete('/meetings/decisons/:meetingid/:topicid/:decisonid',function(req,res,next){console.log( req.params.noteid);
-  Meeting.update({'topics._id': req.params.topicid},
-       {'$pull': {
-              'topics.$.decisons': {  _id: req.params.decisonid },
- 	   }},
-           function(err,model) {
- 	   	if(err){
-         	console.log(err);
-         	return res.send(err);
-         }
-         return res.json(model);
-  });
+router.delete("/meetings/decisons/:meetingid/:topicid/:decisonid", function(
+  req,
+  res,
+  next
+) {
+  console.log(req.params.noteid);
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $pull: {
+        "topics.$.decisons": { _id: req.params.decisonid }
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
+    }
+  );
 });
 
 //update notes
-router.put('/meetings/decisons/:meetingid/:topicid/:decisonid',function(req,res,next){console.log( req.params.noteid);
-  Meeting.update({'topics._id': req.params.topicid},
-       {'$set': {
-              'topics.$.decisons':  req.body,
- 	   }},
-           function(err,model) {
- 	   	if(err){
-         	console.log(err);
-         	return res.send(err);
-         }
-         return res.json(model);
-  });
-});
-
-//_______________________________________Task__________________________________
-
-router.get("/tasks", function(req, res, next) {
-  Task.find({}).then(function(err, task) {
-    if (err) {
-      res.send(err);
+router.put("/meetings/decisons/:meetingid/:topicid/:decisonid", function(
+  req,
+  res,
+  next
+) {
+  console.log(req.params.noteid);
+  Meeting.update(
+    { "topics._id": req.params.topicid },
+    {
+      $set: {
+        "topics.$.decisons": req.body
+      }
+    },
+    function(err, model) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.json(model);
     }
-    res.send(task);
-  });
-});
-
-//get by id
-router.get("/tasks/:id", function(req, res, next) {
-  Task.findOne({ _id: req.params.id }, req.body).then(function(task) {
-    res.send(task);
-  });
-});
-
-router.post("/tasks", function(req, res, next) {
-  Task.create(req.body)
-    .then(function(task) {
-      res.send(task);
-    })
-    .catch(next);
-});
-
-
-
-//update
-router.put("/tasks/:id", function(req, res, next) {
-  Task.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function() {
-    Task.findOne({ _id: req.params.id }, req.body).then(function(task) {
-      res.send(task);
-    });
-  });
-});
-
-//delete
-router.delete("/tasks/:id", function(req, res, next) {
-  Task.findByIdAndRemove({ _id: req.params.id }).then(function(task) {
-    res.send(task);
-  });
+  );
 });
 
 module.exports = router;
