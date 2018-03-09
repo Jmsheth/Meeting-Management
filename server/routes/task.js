@@ -44,4 +44,30 @@ router.delete("/tasks/:id", function(req, res, next) {
   });
 });
 
+//push new comments
+
+router.post("/tasks/comments/:taskid", function(req, res, next) {
+  Task.findByIdAndUpdate(
+    { _id: req.params.taskid },
+    { $push: { comments: req.body } },
+    { safe: true, upsert: true }
+  ).then(function() {
+    Task.findOne({ _id: req.params.taskid }).then(function(task) {
+      res.send(task);
+    });
+  });
+});
+
+//delete topics
+router.delete("/tasks/comments/:taskid/:comid", function(req, res, next) {
+  Task.findByIdAndUpdate(
+    { _id: req.params.taskid },
+    { $pull: { comments: { _id: req.params.comid } } }
+  ).then(function() {
+    Task.findOne({ _id: req.params.taskid }).then(function(task) {
+      res.send(task);
+    });
+  });
+});
+
 module.exports = router;
