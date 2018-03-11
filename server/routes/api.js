@@ -117,11 +117,7 @@ router.post("/meetings/notes/:meetingid/:topicid/", function(req, res, next) {
 });
 
 //delete notes
-router.delete("/meetings/notes/:meetingid/:topicid/:noteid", function(
-  req,
-  res,
-  next
-) {
+router.delete("/meetings/notes/:meetingid/:topicid/:noteid", function(req,res,next) {
   console.log(req.params.noteid);
   Meeting.update(
     { "topics._id": req.params.topicid },
