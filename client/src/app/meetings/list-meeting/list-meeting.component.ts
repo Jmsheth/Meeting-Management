@@ -1,14 +1,13 @@
 import { MeetingsService } from './../../meetings.service';
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-
 @Component({
-  selector: 'app-create-meeting',
-  templateUrl: './create-meeting.component.html',
-  styleUrls: ['./create-meeting.component.css']
+  selector: 'app-list-meeting',
+  templateUrl: './list-meeting.component.html',
+  styleUrls: ['./list-meeting.component.css']
 })
-export class CreateMeetingComponent implements OnInit {
- meetings: any[];
+export class ListMeetingComponent implements OnInit {
+  meetings: any[];
   constructor(  private meetingservice:MeetingsService) { }
     loadMeetings(){
     // Get all comments
@@ -25,5 +24,6 @@ export class CreateMeetingComponent implements OnInit {
     //load meetings
     this.loadMeetings()
   }
+
 
 }

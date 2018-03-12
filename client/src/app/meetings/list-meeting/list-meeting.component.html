@@ -1,0 +1,15 @@
+
+<p>
+  list-meeting works!
+</p>
+
+<div class="list-group" *ngFor="let meeting of meetings">
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1" > {{meeting.m_name}}</h5>
+      <small>{{meeting.to_date}}</small>
+    </div>
+    <small>{{meeting.m_participant}}</small>
+  </a>
+ 
+</div>
