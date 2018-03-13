@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Meeting = require("./meeting");
+const Task = require("./Task");
+const Recipient = require("./Recipient");
 //create tasks using mongodb
 
 const taskSchema = new Schema({

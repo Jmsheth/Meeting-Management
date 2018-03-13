@@ -1,7 +1,6 @@
-<ul class="list-group">
-  <li *ngFor="let post of posts"
-    class = "list-group-item">
-    {{ post.dueDate }}
-    
-  </li>
+<ul class="list-group" *ngFor="let post of posts">
+  <li><h3>{{post.taskName}}</h3></li>
+  <li>Responsible: {{post.taskParticipant}}</li>
+  <li>Due Date: {{ post.dueDate }}</li>
+  <li>Tag: {{ post.tags }}</li>
 </ul>
