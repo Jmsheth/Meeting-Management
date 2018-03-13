@@ -6,9 +6,11 @@ import { Http } from "@angular/http";
   styleUrls: ["./get-task.component.css"]
 })
 export class GetTaskComponent implements OnInit {
+  posts: any[];
   constructor(http: Http) {
     http.get("http://127.0.0.1:4000/api/tasks").subscribe(response => {
-      console.log(response);
+      console.log(response.json());
+      this.posts = response.json();
     });
   }
   ngOnInit() {}
