@@ -8,7 +8,8 @@ import { Http } from '@angular/http';
   styleUrls: ['./create-meeting.component.css']
 })
 export class CreateMeetingComponent implements OnInit {
- meetings: any[];
+
+  meetings: any[];
   constructor(  private meetingservice:MeetingsService) { }
     loadMeetings(){
     // Get all comments

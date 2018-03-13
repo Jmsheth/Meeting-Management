@@ -1,6 +1,7 @@
 import { MeetingsService } from './../../meetings.service';
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+
 @Component({
   selector: 'app-list-meeting',
   templateUrl: './list-meeting.component.html',
