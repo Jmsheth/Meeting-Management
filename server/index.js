@@ -5,11 +5,12 @@ const routes = require("./routes/api");
 const task = require("./routes/task");
 const path = require("path");
 const http = require("http");
-
+const cors = require("cors");
 const router = express.Router();
 const app = express(); //make app with express
 
 app.use(bodyParser.json());
+app.use(cors());
 
 mongoose.connect("mongodb://admin:admin@ds261828.mlab.com:61828/meetingdb"); //create db
 mongoose.Promise = global.Promise;
