@@ -19,22 +19,20 @@
       <li class="active"><a href="#">Home</a></li>
     </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Meeting</a></li>
-      <li><a href="#">Task</a></li>
+      <li><a href="/meeting">Meeting</a></li>
+      <li><a routerLink="/task" routerLinkActive="active">Task</a></li>
       <li><a href="#">Calender</a></li>
     </ul>
   </div>
 </nav>
-
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
  </div>
-
-
-<app-create-meeting></app-create-meeting>
-<app-get-task></app-get-task>
+<div class = "container">
+  <router-outlet></router-outlet>
+</div>
 
 
 </body>

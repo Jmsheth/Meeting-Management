@@ -9,6 +9,8 @@ import { HttpClient } from "selenium-webdriver/http";
 import { ListMeetingComponent } from "./meetings/list-meeting/list-meeting.component";
 import { AppRoutingModule } from ".//app-routing.module";
 import { GetTaskComponent } from "./task/listTask/get-task/get-task.component";
+import { ListTaskComponent } from "./task/listTask/list-task/list-task.component";
+import { DetailTaskComponent } from "./task/listTask/detail-task/detail-task.component";
 
 @NgModule({
   declarations: [

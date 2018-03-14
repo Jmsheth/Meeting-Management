@@ -1,10 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Routes, RouterModule } from "@angular/router";
+import { GetTaskComponent } from "./task/listTask/get-task/get-task.component";
+import { ListMeetingComponent } from "./meetings/list-meeting/list-meeting.component";
+
+const routes: Routes = [
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "meeting", component: ListMeetingComponent },
+  { path: "task", component: GetTaskComponent }
+];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

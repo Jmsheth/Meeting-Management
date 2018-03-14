@@ -28,6 +28,10 @@ const taskSchema = new Schema({
     type: String,
     required: [false]
   },
+  is_done: {
+    type: Boolean,
+    default: false
+  },
   comments: [
     {
       comment: String
