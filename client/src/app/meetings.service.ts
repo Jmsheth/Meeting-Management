@@ -8,7 +8,6 @@ import "rxjs/add/operator/catch";
 
 @Injectable()
 export class MeetingsService {
-<<<<<<< HEAD
 
 
   constructor (private http: Http) {}
