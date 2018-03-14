@@ -10,6 +10,7 @@ import "rxjs/add/operator/catch";
 export class MeetingsService {
 <<<<<<< HEAD
 
+
   constructor (private http: Http) {}
   private meetingUrl = 'http://127.0.0.1:4000/api/meetings/';  // URL to web api 
  /** GET meetings from the server */
