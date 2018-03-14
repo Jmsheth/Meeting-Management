@@ -1,3 +1,6 @@
-<p>
-  get-task works!
-</p>
+<ul class="list-group" *ngFor="let post of tasks">
+  <li><h3>{{post.taskName}}</h3></li>
+  <li>Responsible: {{post.taskParticipant}}</li>
+  <li>Due Date: {{ post.dueDate }}</li>
+  <li>Tag: {{ post.tags }}</li>
+</ul>
