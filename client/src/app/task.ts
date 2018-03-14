@@ -1,3 +1,7 @@
 export class Task {
-  task: any[];
+  taskName: String;
+  taskParticipant: String;
+  dueDate: Date;
+  tag: String;
+  notes: String;
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { Http } from "@angular/http";
 import { TaskService } from "./../../../task.service";
-
+import { Task } from "./../../../task";
 @Component({
   selector: "app-get-task",
   templateUrl: "./get-task.component.html",
   styleUrls: ["./get-task.component.css"]
 })
 export class GetTaskComponent implements OnInit {
-  tasks: any[];
+  tasks: Array<Task>;
   constructor(private taskservice: TaskService) {}
   // Get all comments
   loadTasks() {

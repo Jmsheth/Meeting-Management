@@ -1,6 +1,36 @@
-<ul class="list-group" *ngFor="let post of tasks">
-  <li><h3>{{post.taskName}}</h3></li>
-  <li>Responsible: {{post.taskParticipant}}</li>
-  <li>Due Date: {{ post.dueDate }}</li>
-  <li>Tag: {{ post.tags }}</li>
-</ul>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Ideas</h3>
+    <ul class="list-group" *ngFor="let post of tasks">
+       <div *ngIf="post.dueDate == null">
+      <!-- <div *ngIf="post.is_done == false && post.dueDate != null"> -->
+      <li><h4>{{post.taskName}}</h4></li>
+      <li>Responsible: {{post.taskParticipant}}</li>
+      <li>Tag: {{ post.tags }}</li>
+    </div>
+    </ul>
+  </div>
+  <div class="col-sm-4">
+    <h3>To Do</h3>
+    <ul class="list-group" *ngFor="let post of tasks">
+      <div *ngIf="post.is_done == false && post.dueDate != null">
+      <li><h4>{{post.taskName}}</h4></li>
+      <li>Responsible: {{post.taskParticipant}}</li>
+      <li>Due Date: {{ post.dueDate | date}}</li>
+      <li>Tag: {{ post.tags }}</li>
+    </div>
+    </ul>
+  </div>
+  <div class="col-sm-4">
+    <h3>Completed</h3>
+    <ul class="list-group" *ngFor="let post of tasks">
+      <div *ngIf="post.is_done == true">
+      <li><h4>{{post.taskName}}</h4></li>
+      <li>Responsible: {{post.taskParticipant}}</li>
+      <li>Due Date: {{ post.dueDate | date}}</li>
+      <li>Tag: {{ post.tags }}</li>
+    </div>
+    </ul>
+  </div>
+<div>
