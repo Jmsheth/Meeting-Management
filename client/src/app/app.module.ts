@@ -9,19 +9,24 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { ListMeetingComponent } from './meetings/list-meeting/list-meeting.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { GetTaskComponent } from './task/listTask/get-task/get-task.component';
+import { Ng2FilterPipeModule } from 'ng2-filter-pipe';
 
+import { OrderByDoneAndDatePipe } from './order-by-done-and-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateMeetingComponent,
     ListMeetingComponent,
-    GetTaskComponent
+    GetTaskComponent,
+   
+    OrderByDoneAndDatePipe
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2FilterPipeModule
   ],
   providers: [MeetingsService],
   bootstrap: [AppComponent]

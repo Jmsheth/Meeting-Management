@@ -28,6 +28,10 @@ const MeetingSchema = new Schema({
     type: String,
     required: [true, "Locattion is required"]
   },
+  created_by: {
+    type: String,
+    required: [true, "ownername is required"]
+  },
   topics: [
     {
       t_name: {

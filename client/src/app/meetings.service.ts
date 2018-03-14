@@ -20,7 +20,5 @@ export class MeetingsService {
                   .map((res:Response) => res.json())
                   //...errors if any
                   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-
-}
-
+                }
 };
