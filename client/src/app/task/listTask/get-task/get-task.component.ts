@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Http } from "@angular/http";
 import { TaskService } from "./../../../task.service";
 import { Task } from "./../../../task";
+import { FormControl, FormGroup } from "@angular/forms";
+
 @Component({
   selector: "app-get-task",
   templateUrl: "./get-task.component.html",
@@ -9,6 +11,11 @@ import { Task } from "./../../../task";
 })
 export class GetTaskComponent implements OnInit {
   tasks: Array<Task>;
+
+  taskForm = new FormGroup({
+    name: new FormControl()
+  });
+
   constructor(private taskservice: TaskService) {}
   // Get all comments
   loadTasks() {
