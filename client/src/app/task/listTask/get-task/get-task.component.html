@@ -58,15 +58,39 @@
     </div>
 </div>
 -->
+<!-- <div>
 <h2>New Task</h2>
-<h3><i>Just a FormControl</i></h3>
+<label>Task Name: </label><input type="text" name="test" [(ngModel)]="abc"><br/>
+<label>Your Name: </label><input type="text" name="test" [(ngModel)]="abcd"><br/>
+<button class="btn btn-primary" (click)=myabcd()>Submit</button>
+</div> -->
+<form (ngSubmit)="submitTask()">
+            <div class="form-group">
+                <div class="input-group">
+
+                    <input type="text" class="form-control" placeholder="Task Name" [(ngModel)]="model.taskName" name="taskName">
+                </div>
+                <br />
+                <input type="text" class="form-control" placeholder="Task Participant" [(ngModel)]="model.taskParticipant" name="taskProduct">
+                <input type="date" class="form-control" placeholder="Due Date" [(ngModel)]="model.dueDate" name="dueDate">
+                <input type="text" class="form-control" placeholder="Tag" [(ngModel)]="model.tag" name="tag">
+                <input type="text" class="form-control" placeholder="Notes" [(ngModel)]="model.notes" name="notes">
+
+                <br />
+                <button  type="submit" class="btn btn-primary btn-block">Add</button>
+                <button *ngIf="editing" type="submit" class="btn btn-warning btn-block">Update</button>
+            </div>
+</form>
+<!-- <h3><i>Just a FormControl</i></h3>
 <form [formGroup]="taskForm">
   <div class="form-group">
     <label class="center-block">Name:
       <input class="form-control" formControlName="name">
     </label>
+    <p>Form value: {{ taskForm.value | json }}</p>
+<p>Form status: {{ taskForm.status | json }}</p>
   </div>
-</form>
+</form> -->
 
 
 <div class="row">

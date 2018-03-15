@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Http } from "@angular/http";
 import { TaskService } from "./../../../task.service";
 import { Task } from "./../../../task";
-import { FormControl, FormGroup } from "@angular/forms";
-
+import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { Observable } from "rxjs/Rx";
 @Component({
   selector: "app-get-task",
   templateUrl: "./get-task.component.html",
@@ -11,12 +11,35 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class GetTaskComponent implements OnInit {
   tasks: Array<Task>;
+  //abc: any;
 
-  taskForm = new FormGroup({
-    name: new FormControl()
-  });
+  // taskForm = FormGroup;
+
+  // myabcd() {
+  //   console.log(this.abc);
+  //   console.log(this.abcd);
+  // }
 
   constructor(private taskservice: TaskService) {}
+
+  submitTask() {
+    // Variable to hold a reference of addComment/updateComment
+    let taskOperation: Observable<Task[]>;
+    this.taskservice.addTask(this.model).subscribe(err => {
+      // Log errors if any
+      console.log(err);
+    });
+  }
+  //   , private fb: FormBuilder) {
+  //   this.createForm();
+  // }
+  //
+  // createForm() {
+  //   this.taskForm = this.fb.group({
+  //     name: ["", Validators.required] // <--- the FormControl called "name"
+  //   });
+  // }
+
   // Get all comments
   loadTasks() {
     this.taskservice.getTask().subscribe(
