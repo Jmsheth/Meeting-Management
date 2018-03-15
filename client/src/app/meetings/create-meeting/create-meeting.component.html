@@ -1,12 +1,13 @@
 <input type="text" [(ngModel)]="term">
+
 <div class="row">
                 <div class="col-sm-6">
                         <h5>Past Meetings</h5>
-                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
+                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  | filter: term" >
 
-                                <div *ngIf="(meeting.to_date | date :'short')  < (today| date :'short') ">
+                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  <= (today| date :'yyyy-MM-dd HH:mm a z') ">
                                 <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
-                                <li>{{meeting.to_date  | date :'short'}}</li>
+                                <li>{{meeting.from_date  | date :'short'}}</li>
                                 <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
                                 
                         </div>
@@ -16,9 +17,9 @@
                         <h5>Future Meetings</h5>
                         <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
 
-                                <div *ngIf="(meeting.to_date | date :'short')  > (today| date :'short') ">
+                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  > (today| date :'yyyy-MM-dd HH:mm a z') ">
                                 <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
-                                <li>{{meeting.to_date  | date :'short'}}</li>
+                                <li>{{meeting.from_date  | date :'short'}}</li>
                                 <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
                                 
                         </div>

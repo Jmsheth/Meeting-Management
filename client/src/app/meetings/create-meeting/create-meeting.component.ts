@@ -21,7 +21,8 @@ export class CreateMeetingComponent implements OnInit {
     this.meetingservice.getMeetings()
     .subscribe(
       meetings =>{ this.meetings = meetings;
-        this.meetings.sort((a, b) => new Date(a.to_date).getTime() - new Date(b.to_date).getTime()); },
+        this.meetings.sort((a, b) => new Date(a.from_date).getTime() - new Date(b.from_date).getTime());
+         },
       //Bind to view
          err => {
              // Log errors if any
