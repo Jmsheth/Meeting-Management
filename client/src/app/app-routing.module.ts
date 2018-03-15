@@ -1,3 +1,4 @@
+import { CreateMeetingComponent } from './meetings/create-meeting/create-meeting.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
@@ -6,7 +7,7 @@ import { ListMeetingComponent } from "./meetings/list-meeting/list-meeting.compo
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  { path: "meeting", component: ListMeetingComponent },
+  { path: "meeting", component: CreateMeetingComponent },
   { path: "task", component: GetTaskComponent }
 ];
 
