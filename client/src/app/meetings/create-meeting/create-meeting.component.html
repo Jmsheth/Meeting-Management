@@ -1,3 +1,4 @@
+
 <input type="text" [(ngModel)]="term">
 
 <div class="row">
@@ -8,8 +9,11 @@
                                 <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  <= (today| date :'yyyy-MM-dd HH:mm a z') ">
                                 <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
                                 <li>{{meeting.from_date  | date :'short'}}</li>
-                                <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
-                                
+                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by  }}</button> | {{meeting.m_tags}}</li>
+                             
+                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
+                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                </div>
                         </div>
                         </ul>
                 </div>
@@ -20,8 +24,10 @@
                                 <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  > (today| date :'yyyy-MM-dd HH:mm a z') ">
                                 <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
                                 <li>{{meeting.from_date  | date :'short'}}</li>
-                                <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
-                                
+                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by}}</button> | {{meeting.m_tags}} </li>
+                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
+                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                </div>
                         </div>
                         </ul>
                 </div>

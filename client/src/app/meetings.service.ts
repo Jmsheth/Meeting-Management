@@ -10,7 +10,7 @@ import "rxjs/add/operator/catch";
 export class MeetingsService {
 
   constructor(private http: Http) {}
-  private meetingUrl = "http://127.0.0.1:4000/api/meetings/"; // URL to web api
+  private meetingUrl = "http://127.0.0.1:4000/api/meetings"; // URL to web api
   /** GET meetings from the server */
   getMeetings(): Observable<Meeting[]> {
     // ...using get request
@@ -25,5 +25,12 @@ export class MeetingsService {
         )
     );
   }
+
+      // Delete a Meeting
+  removeMeeting (id:string): Observable<Meeting[]> {
+        return this.http.delete(`${this.meetingUrl}/${id}`) // ...using put request
+                         .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+                         .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    } 
 }
 

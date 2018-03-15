@@ -40,7 +40,9 @@ router.put("/meetings/:id", function(req, res, next) {
 //delete
 router.delete("/meetings/:id", function(req, res, next) {
   Meeting.findByIdAndRemove({ _id: req.params.id }).then(function(meeting) {
-    res.send(meeting);
+    Meeting.find({}).then(function(meeting) {
+      res.send(meeting);
+    });
   });
 });
 
