@@ -1,7 +1,34 @@
+<input type="text" [(ngModel)]="term">
+<table>
+        <tr>
+                <th><h5>Past Meetings</h5></th>
+                <th><h5>Future Meetings</h5></th>
+        </tr>
+        <tr>
+                <td>
+                                <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
 
-<ul class="list-group"  *ngFor="let meeting of meetings " >
-        <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
-        <li>{{meeting.to_date  | date :'short'}}</li>
-        <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
+                                                <div *ngIf="(meeting.to_date | date :'short')  < (today| date :'short') ">
+                                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
+                                                <li>{{meeting.to_date  | date :'short'}}</li>
+                                                <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
+                                                
+                                        </div>
+                                        </ul>
+                </td>
+                <td>
+                                <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
 
-</ul>
+                                                <div *ngIf="(meeting.to_date | date :'short')  > (today| date :'short') ">
+                                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
+                                                <li>{{meeting.to_date  | date :'short'}}</li>
+                                                <li>{{meeting.created_by  }} | {{meeting.m_tags}}</li>
+                                                
+                                        </div>
+                                        </ul>
+                </td>
+        </tr>
+
+
+
+</table>

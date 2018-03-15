@@ -3,7 +3,7 @@ import { MeetingsService } from './../../meetings.service';
 import { Component, OnInit,Pipe,Inject,forwardRef,Injectable, PipeTransform  } from '@angular/core';
 import { Http } from '@angular/http';    
 
-
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-create-meeting',
@@ -14,6 +14,7 @@ import { Http } from '@angular/http';
 export class CreateMeetingComponent implements OnInit {
   userFilter: any = { m_participant: 'jmsheth53@gmail.com' };
   meetings: any[];
+  today: number = Date.now();
   constructor(  private meetingservice:MeetingsService) { }
     loadMeetings(){
     // Get all comments
