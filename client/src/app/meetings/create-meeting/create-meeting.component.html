@@ -1,34 +1,55 @@
 
-<input type="text" [(ngModel)]="term">
+<form (ngSubmit)="submitMeeting()">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="Meeting name" [(ngModel)]="model.m_name" name="m_name">
+            </div>
+            <br />
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="Tags" [(ngModel)]="model.m_tags" name="m_tags">
+            </div>
+            <br />
+           
+          
+            <div class='input-group date' id='datetimepicker6'>
+                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <input type='text' class="form-control" placeholder="From date" [(ngModel)]="model.from_date" name="from_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
 
-<div class="row">
-                <div class="col-sm-6">
-                        <h5>Past Meetings</h5>
-                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  | filter: term" >
+            <div class='input-group date' id='datetimepicker7'>
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type='datetime-local' class="form-control" placeholder="To date" [(ngModel)]="model.to_date" name="to_date"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+            </div>
 
-                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  <= (today| date :'yyyy-MM-dd HH:mm a z') ">
-                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
-                                <li>{{meeting.from_date  | date :'short'}}</li>
-                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by  }}</button> | {{meeting.m_tags}}</li>
-                             
-                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
-                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
-                                </div>
-                        </div>
-                        </ul>
-                </div>
-                <div class="col-sm-6">
-                        <h5>Future Meetings</h5>
-                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <input type="text" class="form-control" placeholder="Location" [(ngModel)]="model.location" name="location">
+            </div>
+          
+            <button  type="submit" class="btn btn-primary btn-block">Add</button>
+            
+        </div>
+    </form>
 
-                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  > (today| date :'yyyy-MM-dd HH:mm a z') ">
-                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
-                                <li>{{meeting.from_date  | date :'short'}}</li>
-                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by}}</button> | {{meeting.m_tags}} </li>
-                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
-                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
-                                </div>
-                        </div>
-                        </ul>
-                </div>
-</div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker6').datetimepicker();
+            $('#datetimepicker7').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#datetimepicker6").on("dp.change", function (e) {
+                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+            });
+            $("#datetimepicker7").on("dp.change", function (e) {
+                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>

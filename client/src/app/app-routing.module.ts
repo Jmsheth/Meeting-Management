@@ -7,7 +7,8 @@ import { ListMeetingComponent } from "./meetings/list-meeting/list-meeting.compo
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  { path: "meeting", component: CreateMeetingComponent },
+  { path: "meeting", component: ListMeetingComponent },
+  { path: "meeting/create", component: CreateMeetingComponent },
   { path: "task", component: GetTaskComponent }
 ];
 

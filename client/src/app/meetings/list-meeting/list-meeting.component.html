@@ -1,15 +1,35 @@
+<a href="/meeting/create">New Meeting</a>
+<hr>
+<input type="text" [(ngModel)]="term">
+<hr>
+<div class="row">
+                <div class="col-sm-6">
+                        <h5>Past Meetings</h5>
+                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  | filter: term" >
 
-<p>
-  list-meeting works!
-</p>
+                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  <= (today| date :'yyyy-MM-dd HH:mm a z') ">
+                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
+                                <li>{{meeting.from_date  | date :'short'}}</li>
+                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by  }}</button> | {{meeting.m_tags}}</li>
+                             
+                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
+                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                </div>
+                        </div>
+                        </ul>
+                </div>
+                <div class="col-sm-6">
+                        <h5>Future Meetings</h5>
+                        <ul class="list-group"  *ngFor="let meeting of meetings | filterBy: userFilter  |filter: term" >
 
-<div class="list-group" *ngFor="let meeting of meetings">
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1" > {{meeting.m_name}}</h5>
-      <small>{{meeting.to_date}}</small>
-    </div>
-    <small>{{meeting.m_participant}}</small>
-  </a>
-
+                                <div *ngIf="(meeting.from_date | date :'yyyy-MM-dd HH:mm a z')  > (today| date :'yyyy-MM-dd HH:mm a z') ">
+                                <li><h3 class="mb-1" > {{meeting.m_name}}</h3>  </li>
+                                <li>{{meeting.from_date  | date :'short'}}</li>
+                                <li><button class="link" (click)="update(meeting.created_by)">{{meeting.created_by}}</button> | {{meeting.m_tags}} </li>
+                                <div *ngIf="meeting.created_by==userFilter.m_participant">        
+                                        <button class="btn btn-danger" (click)="deleteMeeting(meeting._id)"><span class="glyphicon glyphicon-remove"></span></button>
+                                </div>
+                        </div>
+                        </ul>
+                </div>
 </div>
