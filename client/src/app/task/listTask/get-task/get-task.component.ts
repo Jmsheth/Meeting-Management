@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Http } from "@angular/http";
 import { TaskService } from "./../../../task.service";
 import { Task } from "./../../../task";
+import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { Observable } from "rxjs/Rx";
 @Component({
   selector: "app-get-task",
   templateUrl: "./get-task.component.html",
@@ -10,6 +12,16 @@ import { Task } from "./../../../task";
 export class GetTaskComponent implements OnInit {
   tasks: Array<Task>;
   constructor(private taskservice: TaskService) {}
+  private model = new Task("", "", "", "", "");
+  submitTask() {
+    // Variable to hold a reference of addComment/updateComment
+    let taskOperation: Observable<Task[]>;
+    this.taskservice.addTask(this.model).subscribe(err => {
+      // Log errors if any
+      console.log(err);
+    });
+  }
+
   // Get all comments
   loadTasks() {
     this.taskservice.getTask().subscribe(
@@ -20,17 +32,8 @@ export class GetTaskComponent implements OnInit {
       }
     );
   }
-  // this.taskService.getTask().subscribe(response => {
-  //     console.log(response.json());
-  //     this.tasks = response.json();
-  //   });
+
   ngOnInit() {
     this.loadTasks();
   }
-  // createPost(taskName: HTMLInputElement) {
-  //   let post = { taskName: taskName.value };
-  //   this.http.post(this.url, JSON.stringify(post)).subscribe(response => {
-  //     console.log(response.json());
-  //   });
-  // }
 }

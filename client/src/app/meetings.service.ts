@@ -8,9 +8,8 @@ import "rxjs/add/operator/catch";
 
 @Injectable()
 export class MeetingsService {
-
   constructor(private http: Http) {}
-  private meetingUrl = "http://127.0.0.1:4000/api/meetings"; // URL to web api
+  private meetingUrl = "http://127.0.0.1:4000/api/meetings/"; // URL to web api
   /** GET meetings from the server */
   getMeetings(): Observable<Meeting[]> {
     // ...using get request
@@ -25,6 +24,7 @@ export class MeetingsService {
         )
     );
   }
+
 
       // Delete a Meeting
   removeMeeting (id:string): Observable<Meeting[]> {
@@ -44,5 +44,5 @@ export class MeetingsService {
                        .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   } 
 
-}
 
+}
