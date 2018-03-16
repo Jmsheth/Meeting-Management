@@ -11,17 +11,8 @@ import { Observable } from "rxjs/Rx";
 })
 export class GetTaskComponent implements OnInit {
   tasks: Array<Task>;
-  //abc: any;
-
-  // taskForm = FormGroup;
-
-  // myabcd() {
-  //   console.log(this.abc);
-  //   console.log(this.abcd);
-  // }
-
   constructor(private taskservice: TaskService) {}
-
+  private model = new Task("", "", "", "", "");
   submitTask() {
     // Variable to hold a reference of addComment/updateComment
     let taskOperation: Observable<Task[]>;
@@ -30,15 +21,6 @@ export class GetTaskComponent implements OnInit {
       console.log(err);
     });
   }
-  //   , private fb: FormBuilder) {
-  //   this.createForm();
-  // }
-  //
-  // createForm() {
-  //   this.taskForm = this.fb.group({
-  //     name: ["", Validators.required] // <--- the FormControl called "name"
-  //   });
-  // }
 
   // Get all comments
   loadTasks() {
@@ -50,17 +32,8 @@ export class GetTaskComponent implements OnInit {
       }
     );
   }
-  // this.taskService.getTask().subscribe(response => {
-  //     console.log(response.json());
-  //     this.tasks = response.json();
-  //   });
+
   ngOnInit() {
     this.loadTasks();
   }
-  // createPost(taskName: HTMLInputElement) {
-  //   let post = { taskName: taskName.value };
-  //   this.http.post(this.url, JSON.stringify(post)).subscribe(response => {
-  //     console.log(response.json());
-  //   });
-  // }
 }

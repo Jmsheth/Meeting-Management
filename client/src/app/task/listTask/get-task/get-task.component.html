@@ -1,26 +1,36 @@
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Launch demo modal
-</button> -->
+</button>
 
 <!-- Modal -->
-<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Task</h4>
       </div>
       <div class="modal-body">
-        ...
+        <form (ngSubmit)="submitTask()">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Task Name" [(ngModel)]="model.taskName" name="taskName">
+                    <input type="text" class="form-control" placeholder="Task Participant" [(ngModel)]="model.taskParticipant" name="taskProduct">
+                    <input type="date" class="form-control" placeholder="Due Date" [(ngModel)]="model.dueDate" name="dueDate">
+                    <input type="text" class="form-control" placeholder="Tag" [(ngModel)]="model.tags" name="tags">
+                    <input type="text" class="form-control" placeholder="Notes" [(ngModel)]="model.notes" name="notes">
+                    <br />
+                    <button  type="submit" class="btn btn-primary btn-block">Add</button>
+                    <button *ngIf="editing" type="submit" class="btn btn-warning btn-block">Update</button>
+                    </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <!--
 <button class="btn btn-primary" data-target="#loginModal" data-toggle="modal">Login</button>
 
@@ -64,23 +74,7 @@
 <label>Your Name: </label><input type="text" name="test" [(ngModel)]="abcd"><br/>
 <button class="btn btn-primary" (click)=myabcd()>Submit</button>
 </div> -->
-<form (ngSubmit)="submitTask()">
-            <div class="form-group">
-                <div class="input-group">
 
-                    <input type="text" class="form-control" placeholder="Task Name" [(ngModel)]="model.taskName" name="taskName">
-                </div>
-                <br />
-                <input type="text" class="form-control" placeholder="Task Participant" [(ngModel)]="model.taskParticipant" name="taskProduct">
-                <input type="date" class="form-control" placeholder="Due Date" [(ngModel)]="model.dueDate" name="dueDate">
-                <input type="text" class="form-control" placeholder="Tag" [(ngModel)]="model.tag" name="tag">
-                <input type="text" class="form-control" placeholder="Notes" [(ngModel)]="model.notes" name="notes">
-
-                <br />
-                <button  type="submit" class="btn btn-primary btn-block">Add</button>
-                <button *ngIf="editing" type="submit" class="btn btn-warning btn-block">Update</button>
-            </div>
-</form>
 <!-- <h3><i>Just a FormControl</i></h3>
 <form [formGroup]="taskForm">
   <div class="form-group">
@@ -91,40 +85,60 @@
 <p>Form status: {{ taskForm.status | json }}</p>
   </div>
 </form> -->
-
-
-<div class="row">
-  <div class="col-sm-4">
-    <h3>Ideas</h3>
-    <ul class="list-group" *ngFor="let post of tasks">
-       <div *ngIf="post.dueDate == null && post.is_done == false">
-      <!-- <div *ngIf="post.is_done == false && post.dueDate != null"> -->
-      <li><h4>{{post.taskName}}</h4></li>
-      <li>Responsible: {{post.taskParticipant}}</li>
-      <li>Tag: {{ post.tags }}</li>
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
+                      Ideas</h3>
+              </div>
+              <div class="pre-scrollable">
+              <ul class="list-group" *ngFor="let post of tasks">
+                 <div *ngIf="post.dueDate == null && post.is_done == false">
+                <!-- <div *ngIf="post.is_done == false && post.dueDate != null"> -->
+                <li class="list-group-item"><h4>{{post.taskName}}</h4></li>
+                <li class="list-group-item">Responsible: {{post.taskParticipant}}</li>
+                <li class="list-group-item">Tag: {{ post.tags }}</li>
+              </div>
+              </ul>
+            </div>
+          </div>
+      </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        To Do</h3>
+                </div>
+                <div class="pre-scrollable">
+                <ul class="list-group" *ngFor="let post of tasks">
+                  <div *ngIf="post.is_done == false && post.dueDate != null">
+                  <li class="list-group-item"><h4>{{post.taskName}}</h4></li>
+                  <li class="list-group-item">Responsible: {{post.taskParticipant}}</li>
+                  <li class="list-group-item">Due Date: {{ post.dueDate | date}}</li>
+                  <li class="list-group-item">Tag: {{ post.tags }}</li>
+                </div>
+                </ul>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> Completed </h3>
+                </div>
+                <div class="panel-body pre-scrollable">
+                <ul class="list-group" *ngFor="let post of tasks">
+                <div *ngIf="post.is_done == true">
+                  <li class="list-group-item"><h4>{{post.taskName}}</h4></li>
+                  <li class="list-group-item">Responsible: {{post.taskParticipant}}</li>
+                  <li class="list-group-item">Due Date: {{ post.dueDate | date}}</li>
+                  <li class="list-group-item">Tag: {{ post.tags }}</li>
+                </div>
+                </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    </ul>
-  </div>
-  <div class="col-sm-4">
-    <h3>To Do</h3>
-    <ul class="list-group" *ngFor="let post of tasks">
-      <div *ngIf="post.is_done == false && post.dueDate != null">
-      <li><h4>{{post.taskName}}</h4></li>
-      <li>Responsible: {{post.taskParticipant}}</li>
-      <li>Due Date: {{ post.dueDate | date}}</li>
-      <li>Tag: {{ post.tags }}</li>
-    </div>
-    </ul>
-  </div>
-  <div class="col-sm-4">
-    <h3>Completed</h3>
-    <ul class="list-group" *ngFor="let post of tasks">
-      <div *ngIf="post.is_done == true">
-      <li><h4>{{post.taskName}}</h4></li>
-      <li>Responsible: {{post.taskParticipant}}</li>
-      <li>Due Date: {{ post.dueDate | date}}</li>
-      <li>Tag: {{ post.tags }}</li>
-    </div>
-    </ul>
-  </div>
-<div>
+</div>
