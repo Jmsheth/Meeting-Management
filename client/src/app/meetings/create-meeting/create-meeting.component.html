@@ -1,4 +1,8 @@
-
+<html>
+    <head>
+     
+    </head>
+<body>
 <form (ngSubmit)="submitMeeting()">
         <div class="form-group">
             <div class="input-group">
@@ -14,7 +18,7 @@
            
           
             <div class='input-group date' id='datetimepicker6'>
-                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                <span class="input-group-addon" ><span class="glyphicon glyphicon-user"></span></span>
                 <input type='text' class="form-control" placeholder="From date" [(ngModel)]="model.from_date" name="from_date"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
@@ -22,7 +26,7 @@
             </div>
 
             <div class='input-group date' id='datetimepicker7'>
-                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
                         <input type='datetime-local' class="form-control" placeholder="To date" [(ngModel)]="model.to_date" name="to_date"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -38,7 +42,6 @@
             
         </div>
     </form>
-
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker6').datetimepicker();
@@ -53,3 +56,5 @@
             });
         });
     </script>
+    </body>
+   </html>
